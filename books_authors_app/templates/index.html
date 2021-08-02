@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books and Authors</title>
+    <title>Add Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" </head>
 
-</head>
 <body>
     <div id="wrapper">
-        <div id="header">
-            <a href="/add_book">Add a book</a>
-            <a href="/add_author">Add an author</a>
+        <div class="division_box">
+
+            <h1>Add a Book</h1>
+            <form action="/add_book" method="POST">
+                {% csrf_token %}
+                <div class="input_divider">
+                    <label for="title">Title</label>
+                    <input name="title_input" type="text">
+                </div>
+                <div class="input_divider">
+                    <label for="description">Description</label>
+                    <textarea name="desc_input" rows="8" cols="30"></textarea>
+                </div>
+                <button type="submit" value="Add" name="add_book" class="submit_button">Add</button>
+            </form>
+        </div>
+        <div class="division_box">
+            <table id="book_table" class="table table_secondary table-striped table-bordered">
+                <tr>
+                    <thead class="table_head">
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </thead>
+                    
+                </tr>
+                {%  for book in all_books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.title}}</td>
+                    <td><a href="/get_book/{{book.id}}" value="book.id" name="book_id">View</a></td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
     </div>
 </body>
+
 </html>

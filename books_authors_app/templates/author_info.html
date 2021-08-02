@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Author Info</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div id='wrapper'>
+        <div class="info_div">
+            <h1>{{this_author.first_name}} {{this_author.last_name}}</h1>
+            <h2>ID:  {{this_author.id}}</h2>
+            <div class="description_div">
+                <h2>Notes</h2>
+                <p>{{this_author.notes}}</p>
+            </div>
+            <h2>Books</h2>
+            <ul>
+                {% for Book in this_author.book.all %}
+                <li value="{{Book.id}}">{{Book.title}} 
+                    <a href="delete_book/{{this_author.id}}/{{Book.id}}">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <form action="book_to_author/{{this_author.id}}" method="POST">
+                {% csrf_token %}
+                <select name="add_book_input">
+                    <option value="" disabled selected>Add another book?</option>
+                    {% for book in all_books %}
+                    <option value="{{book.id}}">{{book.title}}</option>"
+                    
+                    {% endfor %}
+                </select>
+                <button type="submit" value="{{book.id}}" name="book_to_add" class="submit_button">Add</button>
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>
