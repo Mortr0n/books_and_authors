@@ -67,7 +67,16 @@ def delete_book(request, authorID, bookID):
     #     book_to_delete.delete()
     return redirect(f'/get_author/{authorID}')
 
+# Delete should always be a post request.  
+# I may not have done this correctly!
 def delete_author(request, bookID, authorID):
+    # look at next two lines to keep someone from typing 
+    # HTML to randomly delete or update or whatever your method is!!!!
+    # if request.method != 'POST':
+        # return('/')
+        
+    # delete should never be an <a href> tag it should be a button with a POST!!!
+    # You could style the button to look like an <a href> tag afterwards
     if Authors.objects.filter(id=authorID):
         this_book = Books.objects.get(id=bookID)
         this_author = Authors.objects.get(id=authorID)
