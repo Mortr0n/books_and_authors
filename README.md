@@ -15,4 +15,4 @@
 <h2 align="center">View specific information on an author and add or delete books that they wrote</h2>
 <p align="center">
 <img src="https://github.com/Mortr0n/books_and_authors/blob/9f1fed79c0b9cf6fe6622d24aace6471b978190d/authorview.PNG">
-</p>
+</p>   
